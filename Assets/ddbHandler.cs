@@ -27,7 +27,7 @@ public class ddbHandler : MonoBehaviour {
 	public Text resultText;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		RegionEndpoint usEast = RegionEndpoint.USEast1;
 		CognitoAWSCredentials credentials = new CognitoAWSCredentials("arn:aws:iam::798924599061:user/mobileService", RegionEndpoint.USEast1);
 		AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentials,RegionEndpoint.USEast1);
