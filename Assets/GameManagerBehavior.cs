@@ -86,7 +86,7 @@ public class GameManagerBehavior : MonoBehaviour
             }
         }
     }
-
+    private static string healthBarName = "greenhealth";
     // Use this for initialization
     void Start()
     {
@@ -95,14 +95,14 @@ public class GameManagerBehavior : MonoBehaviour
         Wave = 0;
         Health = 5;
         
-        originalScale = GameObject.Find("healthSliderTop").transform.localScale.x;
+        originalScale = GameObject.Find(healthBarName).transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 tmpScale = GameObject.Find("healthSliderTop").transform.localScale;
+        Vector3 tmpScale = GameObject.Find(healthBarName).transform.localScale;
         tmpScale.x = (health / 5.0f);
-        GameObject.Find("healthSliderTop").transform.localScale = tmpScale;
+        GameObject.Find(healthBarName).transform.localScale = tmpScale;
     }
 }
