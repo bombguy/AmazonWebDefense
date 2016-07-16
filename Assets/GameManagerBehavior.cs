@@ -69,15 +69,6 @@ public class GameManagerBehavior : MonoBehaviour
                 Camera.main.GetComponent<CameraShake>().Shake();
             }
             // 2
-            health = value;
-            healthLabel.text = "Health " + health;
-            if (value >= 0)
-            {
-                healthBar.fillAmount = value / 5.0f;
-            } else {
-                healthBar.fillAmount = 0f;
-            }
-            // 2
             if (health <= 0 && !gameOver)
             {
                 gameOver = true;
