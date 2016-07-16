@@ -15,7 +15,7 @@ public class MoveEnemy : MonoBehaviour {
 	void Start () {
 		lastWaypointSwitchTime = Time.time;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		GameManagerBehavior gameManager =
@@ -50,7 +50,11 @@ public class MoveEnemy : MonoBehaviour {
 		float totalTimeForPath = pathLength / speedUpRate;
 		if (totalTimeForPath <= 0.4)
 			totalTimeForPath = 0.4f;
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 46e5949f498865c7cb181b326686c8bf606b83bf
 		float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
 		gameObject.transform.position = Vector3.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 		// 3 
@@ -59,12 +63,12 @@ public class MoveEnemy : MonoBehaviour {
 				// 4 Switch to next waypoint
 				currentWaypoint++;
 				lastWaypointSwitchTime = Time.time;
-			
+
 				RotateIntoMoveDirection();
 			} else {
 				// 5 Destroy enemy
 				Destroy(gameObject);
- 
+
 				AudioSource audioSource = gameObject.GetComponent<AudioSource>();
 				AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 
