@@ -1,0 +1,17 @@
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/UnityEngine.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/UnityEditor.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Mono.Cecil.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Unity.DataContract.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/obj/Debug/Assembly-CSharp.dll
+/Users/tylbak/hackathon/AmazonWebDefense/ProjectSettings/AmazonWebDefense/obj/Debug/Assembly-CSharp.dll.mdb

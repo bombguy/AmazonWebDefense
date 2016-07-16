@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class GameManagerBehavior : MonoBehaviour {
 
-	public Text goldLabel;
-	private int gold;
-	public int Gold {
-  		get { return gold; }
+	public Text scoreLabel;
+	private int score;
+	public int Score {
+  		get { return score; }
   		set {
-			gold = value;
-    		goldLabel.GetComponent<Text>().text = "GOLD: " + gold;
+			score = value;
+			scoreLabel.GetComponent<Text>().text = "Score: " + score;
 		}
 	}
 
@@ -66,7 +66,7 @@ public class GameManagerBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Gold = 1000;
+		Score = 1000;
 		Wave = 0;
 		Health = 5;
 	}
