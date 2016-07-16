@@ -30,8 +30,11 @@ public class SpawnEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// 1
-		int currentWave = gameManager.Wave;
+        if (!gameManager.running)
+            return;
+
+        // 1
+        int currentWave = gameManager.Wave;
 		if (currentWave < waves.Length) {
 			// 2
 			float timeInterval = Time.time - lastSpawnTime;
