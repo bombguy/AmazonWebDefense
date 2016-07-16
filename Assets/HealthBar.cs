@@ -13,8 +13,8 @@ public class HealthBar : MonoBehaviour {
 		originalScale = gameObject.transform.localScale.x;	
 		gameManager =
 			GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
-		maxHealth = 100 + (4 * gameManager.Wave);
-		currentHealth = 100 + (4 * gameManager.Wave);
+		maxHealth = 100 + (5 * gameManager.Wave);
+		currentHealth = 100 + (5 * gameManager.Wave);
 	}
 	
 	// Update is called once per frame
