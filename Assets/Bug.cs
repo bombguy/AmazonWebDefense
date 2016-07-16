@@ -26,6 +26,8 @@ public class Bug : MonoBehaviour {
 
 
 			Destroy(gameObject);
+			AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+			AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 			ddb.PerformPlayStore ("default");
 		}
 		
