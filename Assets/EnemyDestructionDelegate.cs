@@ -19,6 +19,8 @@ public class EnemyDestructionDelegate : MonoBehaviour {
 	void OnDestroy () {
 		if (enemyDelegate != null) {
 			enemyDelegate (gameObject);
+			AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+			AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 		}
 	}
 }
