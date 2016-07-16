@@ -51,8 +51,9 @@ public class GameManagerBehavior : MonoBehaviour
             waveLabel.text = "Wave " + (wave + 1);
         }
     }
-
+    public float originalScale;
     public Text healthLabel;
+    public Image healthBar;
     public GameObject[] healthIndicator;
 
     private int health;
@@ -69,6 +70,12 @@ public class GameManagerBehavior : MonoBehaviour
             // 2
             health = value;
             healthLabel.text = "HEALTH: " + health;
+            if (value >= 0)
+            {
+                healthBar.fillAmount = value / 5.0f;
+            } else {
+                healthBar.fillAmount = 0f;
+            }
             // 2
             if (health <= 0 && !gameOver)
             {
@@ -86,11 +93,15 @@ public class GameManagerBehavior : MonoBehaviour
         Score = 0;
         Wave = 0;
         Health = 5;
+        
+        originalScale = GameObject.Find("healthSliderTop").transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Vector3 tmpScale = GameObject.Find("healthSliderTop").transform.localScale;
+        tmpScale.x = (health / 5.0f);
+        GameObject.Find("healthSliderTop").transform.localScale = tmpScale;
     }
 }
