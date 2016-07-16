@@ -25,7 +25,7 @@ public class GameManagerBehavior : MonoBehaviour
         set
         {
             score = value;
-            scoreLabel.GetComponent<Text>().text = "Score: " + score;
+            scoreLabel.GetComponent<Text>().text = "" + score;
         }
     }
 
@@ -48,7 +48,7 @@ public class GameManagerBehavior : MonoBehaviour
                     nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
                 }
             }
-            waveLabel.text = "WAVE: " + (wave + 1);
+            waveLabel.text = "Wave " + (wave + 1);
         }
     }
 
@@ -82,7 +82,8 @@ public class GameManagerBehavior : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Score = 1000;
+        Cash = 1024;
+        Score = 0;
         Wave = 0;
         Health = 5;
     }
