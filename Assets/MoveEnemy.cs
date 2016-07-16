@@ -21,7 +21,6 @@ public class MoveEnemy : MonoBehaviour {
 		Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
 		// 2 
 		float pathLength = Vector3.Distance (startPosition, endPosition);
-		print (gameManager.Wave);
 		float totalTimeForPath = pathLength / (speed * (1 + gameManager.Wave));
 		if (totalTimeForPath <= 0.38)
 			totalTimeForPath = 0.38f;
