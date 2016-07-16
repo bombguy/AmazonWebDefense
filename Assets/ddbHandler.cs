@@ -23,15 +23,16 @@ public class ddbHandler : MonoBehaviour {
 		public string bugType { get; set; }
 	}
 
-	private DynamoDBContext ddbContext;
+	public DynamoDBContext ddbContext;
 	public Text resultText;
 
 	// Use this for initialization
 	void Awake () {
-		RegionEndpoint usEast = RegionEndpoint.USEast1;
+		UnityInitializer.AttachToGameObject (this.gameObject);
 		CognitoAWSCredentials credentials = new CognitoAWSCredentials("arn:aws:iam::798924599061:user/mobileService", RegionEndpoint.USEast1);
 		AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentials,RegionEndpoint.USEast1);
 		ddbContext = new DynamoDBContext (ddbClient);
+		print (ddbContext);
 	}
 
 	public void PerformPlayStore()
