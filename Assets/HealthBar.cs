@@ -15,6 +15,10 @@ public class HealthBar : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
 		maxHealth = 100 + (5 * gameManager.Wave);
 		currentHealth = 100 + (5 * gameManager.Wave);
+		if (maxHealth == 210 && currentHealth == 210) {
+			maxHealth = 210;
+			currentHealth = 210;
+		}
 	}
 	
 	// Update is called once per frame
