@@ -2,58 +2,90 @@
 using System.Collections;
 using Amazon;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using Amazon.CognitoIdentity;
 using Amazon.Runtime;
 using Amazon.DynamoDBv2.DataModel;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Amazon.SQS;
+using Amazon.SQS.Model;
+using System.IO;
 
 public class ddbHandler : MonoBehaviour {
 
-	[DynamoDBTable("Plays")]
 	public class Play
 	{
-		[DynamoDBHashKey]   // Hash key.
-		public int gameId { get; set; }
-		[DynamoDBProperty]
 		public int sourcePlayerId { get; set; }
-		[DynamoDBProperty]
-		public int targetPlayerId { get; set; }
-		[DynamoDBProperty]
+		public int targetPlayerId { get ; set; }
 		public string bugType { get; set; }
+
 	}
 
+	private string IDENTITY_POOL_ID, AWS_KEY, AWS_SECRET;
+
+	string[] lines = System.IO.File.ReadAllLines("./.git/auth.conf");
 	public DynamoDBContext ddbContext;
+	public AmazonDynamoDBClient ddbClient;
 	public Text resultText;
+	AmazonSQSClient sqsClient;
 
 	// Use this for initialization
 	void Awake () {
+		IDENTITY_POOL_ID = lines[0];
+		AWS_KEY = lines[1];
+		AWS_SECRET = lines[2];
+
+
 		UnityInitializer.AttachToGameObject (this.gameObject);
-		CognitoAWSCredentials credentials = new CognitoAWSCredentials("arn:aws:iam::798924599061:user/mobileService", RegionEndpoint.USEast1);
-		AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentials,RegionEndpoint.USEast1);
-		ddbContext = new DynamoDBContext (ddbClient);
-		print (ddbContext);
+		//var credentials = new CognitoAWSCredentials("arn:aws:iam::798924599061:user/mobileService", RegionEndpoint.USWest2);
+		//ddbClient = new AmazonDynamoDBClient (credentials);
+		//ddbContext = new DynamoDBContext (ddbClient);
+		//BasicAWSCredentials awsCredentials = new BasicAWSCredentials({},{});
+
+
+		AmazonDynamoDBClient client = new AmazonDynamoDBClient(AWS_KEY, AWS_SECRET, RegionEndpoint.USEast1);
+		sqsClient = new AmazonSQSClient(AWS_KEY, AWS_SECRET, RegionEndpoint.USEast1);
+
+		//ddbContext = new DynamoDBContext(client);
+
 	}
 
-	public void PerformPlayStore()
+	public void PerformPlayStore(string bType) 
 	{
-		Play play = new Play
-		{
-			gameId = 12345,
-			sourcePlayerId = 00001,
-			targetPlayerId = 00002,
-			bugType = "testBug",
+
+		Play myPlay = new Play {
+
+			sourcePlayerId = 1,
+			targetPlayerId = 1,
+			bugType = bType,
 		};
 
-		// Save the book.
-		ddbContext.SaveAsync(play,(result)=>{
-			if(result.Exception == null)
-				print("play saved");
+		sqsClient.CreateQueueAsync(myPlay.targetPlayerId + "_bugs", (result) => {
+			if(result  == null){
+				print("QUEUE COULD NOT BE CREATED");
+				throw(new QueueDoesNotExistException("Queue " + myPlay.targetPlayerId + "_bugs could not be created. We give up!"));	
+			}
 		});
+
+		sqsClient.GetQueueUrlAsync(myPlay.targetPlayerId+"_bugs", (qURLReqCallback)=>{
+			if(qURLReqCallback == null){
+				print("QUEUE DOES NOT EXIST");
+			}else{
+				string message = "{'sourcePlayerId' : '" + myPlay.sourcePlayerId + "','targetPlayerId' : '" + myPlay.targetPlayerId + "','bugType' : '" + myPlay.bugType + "'}"; 
+				SendMessageRequest request = new SendMessageRequest(qURLReqCallback.Response.QueueUrl, message);
+				sqsClient.SendMessageAsync(request, (response)=>{
+					if(response == null)
+						throw(new InvalidMessageContentsException("The following message could not be enqueued: " + message));
+				});
+			}
+		});
+
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

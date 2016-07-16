@@ -13,7 +13,6 @@ public class Bug : MonoBehaviour {
 		gameObject.AddComponent(typeof(ddbHandler));
 		UnityInitializer.AttachToGameObject (this.gameObject);
 		ddb = GetComponent<ddbHandler>();
-		ddb.PerformPlayStore ();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +27,7 @@ public class Bug : MonoBehaviour {
 
 
 			Destroy(gameObject);
-			ddb.PerformPlayStore ();
+			ddb.PerformPlayStore ("default");
 		}
 		
 	}
