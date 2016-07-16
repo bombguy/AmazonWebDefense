@@ -15,12 +15,15 @@ public class MoveEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// 1 
+		GameManagerBehavior gameManager =
+			GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
 		Vector3 startPosition = waypoints [currentWaypoint].transform.position;
 		Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
 		// 2 
 		float pathLength = Vector3.Distance (startPosition, endPosition);
-		float totalTimeForPath = pathLength / speed;
+		float totalTimeForPath = pathLength / (speed * (1 + gameManager.Wave));
+		if (totalTimeForPath <= 0.38)
+			totalTimeForPath = 0.38f;
 		float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
 		gameObject.transform.position = Vector3.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 		// 3 
@@ -38,8 +41,6 @@ public class MoveEnemy : MonoBehaviour {
 				AudioSource audioSource = gameObject.GetComponent<AudioSource>();
 				AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 
-				GameManagerBehavior gameManager =
-					GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
 				gameManager.Health -= 1;
 			}
 		}
