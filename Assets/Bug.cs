@@ -7,7 +7,6 @@ using Amazon;
 public class Bug : MonoBehaviour {
 
 	public sqsHandler sqs;
-	public 
 	// Use this for initialization
 	void Start () {
 		gameObject.AddComponent(typeof(sqsHandler));
@@ -17,8 +16,7 @@ public class Bug : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth <= 0)
-		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth < 0) {
+		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth <= 0) {
 
 		 	GameManagerBehavior gameManager =
 		 	GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
@@ -28,6 +26,8 @@ public class Bug : MonoBehaviour {
 
 
 			Destroy(gameObject);
+			AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+			AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 			sqs.PerformPlayStore ("default", gameManager.playerName+gameManager.playerUID);
 			sqs.UpNext (gameManager.playerName);
 		}

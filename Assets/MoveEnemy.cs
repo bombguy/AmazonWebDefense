@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MoveEnemy : MonoBehaviour {
 	[HideInInspector]
@@ -7,12 +8,14 @@ public class MoveEnemy : MonoBehaviour {
 	private int currentWaypoint = 0;
 	private float lastWaypointSwitchTime;
 	public float speed = 1.0f;
+	int currentWave = 0;
+	int factor = 1;
 
 	// Use this for initialization
 	void Start () {
 		lastWaypointSwitchTime = Time.time;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		GameManagerBehavior gameManager =
@@ -21,9 +24,33 @@ public class MoveEnemy : MonoBehaviour {
 		Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
 		// 2 
 		float pathLength = Vector3.Distance (startPosition, endPosition);
-		float totalTimeForPath = pathLength / (speed * (1 + gameManager.Wave));
-		if (totalTimeForPath <= 0.38)
-			totalTimeForPath = 0.38f;
+
+		float speedUpRate = 0.0f;
+		System.Random random = new System.Random ();
+
+		if (currentWave != gameManager.Wave) {
+			currentWave = gameManager.Wave;
+			factor = random.Next (1, 6);
+		}
+
+		if (gameManager.Wave <= 10)
+			speedUpRate = (speed * (0.3f + gameManager.Wave / factor));
+		else if (gameManager.Wave <= 20)
+			speedUpRate = (speed * (0.3f + gameManager.Wave / factor));
+		else if (gameManager.Wave <= 30)
+			speedUpRate = (speed * (0.3f + gameManager.Wave / factor));
+		else if (gameManager.Wave <= 40)
+			speedUpRate = (speed * (0.3f + gameManager.Wave / factor));
+		else if (gameManager.Wave <= 50)
+			speedUpRate = (speed * (0.3f + gameManager.Wave / factor));
+
+
+
+
+		float totalTimeForPath = pathLength / speedUpRate;
+		if (totalTimeForPath <= 0.4)
+			totalTimeForPath = 0.4f;
+
 		float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
 		gameObject.transform.position = Vector3.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 		// 3 
@@ -32,12 +59,12 @@ public class MoveEnemy : MonoBehaviour {
 				// 4 Switch to next waypoint
 				currentWaypoint++;
 				lastWaypointSwitchTime = Time.time;
-			
+
 				RotateIntoMoveDirection();
 			} else {
 				// 5 Destroy enemy
 				Destroy(gameObject);
- 
+
 				AudioSource audioSource = gameObject.GetComponent<AudioSource>();
 				AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 
