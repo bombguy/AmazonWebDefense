@@ -5,22 +5,18 @@ using Amazon;
 
 
 public class Bug : MonoBehaviour {
+	private ddbHandler handler;
 
-	public ddbHandler ddb;
-	public 
 	// Use this for initialization
 	void Start () {
-		gameObject.AddComponent(typeof(ddbHandler));
-		UnityInitializer.AttachToGameObject (this.gameObject);
-		ddb = GetComponent<ddbHandler>();
-		ddb.PerformPlayStore ();
+		handler = gameObject.GetComponent<ddbHandler> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth < 0) {
+			handler.PerformPlayStore ("default");
 			Destroy (gameObject);
-			ddb.PerformPlayStore ();
 		}
 		
 	}

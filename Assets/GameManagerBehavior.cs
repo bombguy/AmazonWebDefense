@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Amazon;
+using Amazon.DynamoDBv2;
 
 public class GameManagerBehavior : MonoBehaviour
 {
@@ -65,6 +67,8 @@ public class GameManagerBehavior : MonoBehaviour
         }
     }
     private static string healthBarName = "greenhealth";
+
+	public 
     // Use this for initialization
     void Start()
     {
@@ -73,6 +77,8 @@ public class GameManagerBehavior : MonoBehaviour
         Health = 5;
         
         originalScale = GameObject.Find(healthBarName).transform.localScale.x;
+
+
     }
 
     // Update is called once per frame
@@ -82,4 +88,6 @@ public class GameManagerBehavior : MonoBehaviour
         tmpScale.x = (health / 5.0f);
         GameObject.Find(healthBarName).transform.localScale = tmpScale;
     }
+
+
 }
