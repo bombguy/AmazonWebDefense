@@ -45,6 +45,10 @@ public class MoveEnemy : MonoBehaviour {
 		}
 	}
 
+	public void onMouseClick() {
+		Debug.Log("asd");
+	}
+
 	private void RotateIntoMoveDirection() {
 		//1
 		Vector3 newStartPosition = waypoints [currentWaypoint].transform.position;

@@ -4,19 +4,6 @@ using UnityEngine.UI;
 
 public class GameManagerBehavior : MonoBehaviour
 {
-
-    public Text cashLabel;
-    private int cash;
-    public int Cash
-    {
-        get { return cash; }
-        set
-        {
-            cash = value;
-            cashLabel.GetComponent<Text>().text = "$" + cash;
-        }
-    }
-
     public Text scoreLabel;
     private int score;
     public int Score
@@ -81,7 +68,6 @@ public class GameManagerBehavior : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Cash = 1024;
         Score = 0;
         Wave = 0;
         Health = 5;
