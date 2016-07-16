@@ -15,6 +15,18 @@ public class GameManagerBehavior : MonoBehaviour
             scoreLabel.GetComponent<Text>().text = "" + score;
         }
     }
+    public Text bugLabel;
+    private int bug;
+    public int Bug
+    {
+        get { return bug; }
+        set
+        {
+            bug = value;
+            if(bugLabel != null && bugLabel.GetComponent<Text>() != null)
+            bugLabel.GetComponent<Text>().text = "" + bug;
+        }
+    }
 
     public Text waveLabel;
     public GameObject[] nextWaveLabels;
@@ -62,13 +74,17 @@ public class GameManagerBehavior : MonoBehaviour
             // 2
             if (health <= 0 && !gameOver)
             {
+                
                 gameOver = true;
-                GameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
-                gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+                showEnd();
+                //SGameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
+
+                
             }
         }
     }
     private static string healthBarName = "greenhealth";
+    private float originalPos;
     // Use this for initialization
     void Start()
     {
@@ -77,13 +93,40 @@ public class GameManagerBehavior : MonoBehaviour
         Health = 5;
         
         originalScale = GameObject.Find(healthBarName).transform.localScale.x;
+        originalPos = GameObject.Find(healthBarName).transform.position.x;
+        print(originalPos);
+
+        Vector3 scale = GameObject.Find("EndObj").transform.localScale;
+        scale.x = 0;
+        scale.y = 0;
+        GameObject.Find("EndObj").transform.localScale = scale;
+    }
+
+    void showEnd()
+    {
+        Vector3 scale = GameObject.Find("EndObj").transform.localScale;
+        scale.x = 1;
+        scale.y = 1;
+        GameObject.Find("EndObj").transform.localScale = scale;
+
+        Vector3 scale1 = GameObject.Find("HealthBar").transform.localScale;
+        scale1.x = 0;
+        scale1.y = 0;
+        GameObject.Find("HealthBar").transform.localScale = scale1;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 loc = GameObject.Find(healthBarName).transform.position;
+
         Vector3 tmpScale = GameObject.Find(healthBarName).transform.localScale;
         tmpScale.x = (health / 5.0f);
         GameObject.Find(healthBarName).transform.localScale = tmpScale;
+
+        loc.x = originalPos;
+        GameObject.Find(healthBarName).transform.position = loc;
     }
 }
