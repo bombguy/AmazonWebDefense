@@ -6,13 +6,13 @@ using Amazon;
 
 public class Bug : MonoBehaviour {
 
-	public ddbHandler ddb;
+	public sqsHandler sqs;
 	public 
 	// Use this for initialization
 	void Start () {
-		gameObject.AddComponent(typeof(ddbHandler));
+		gameObject.AddComponent(typeof(sqsHandler));
 		UnityInitializer.AttachToGameObject (this.gameObject);
-		ddb = GetComponent<ddbHandler>();
+		sqs = GetComponent<sqsHandler>();
 	}
 	
 	// Update is called once per frame
@@ -22,12 +22,14 @@ public class Bug : MonoBehaviour {
 
 		 	GameManagerBehavior gameManager =
 		 	GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
-		    	gameManager.Score += 1;
-		    	gameManager.Bug += 1;
+	    	gameManager.Score += 1;
+	    	gameManager.Bug += 1;
+
 
 
 			Destroy(gameObject);
-			ddb.PerformPlayStore ("default");
+			sqs.PerformPlayStore ("default", gameManager.playerName+gameManager.playerUID);
+			sqs.UpNext (gameManager.playerName);
 		}
 		
 	}

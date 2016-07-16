@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class GameManagerBehavior : MonoBehaviour
 {
     public Text scoreLabel;
+	public string playerName;
+	public System.Random rand = new System.Random();
+	public string playerUID;
     private int score;
     public int Score
     {
@@ -77,9 +81,7 @@ public class GameManagerBehavior : MonoBehaviour
                 
                 gameOver = true;
                 showEnd();
-                //SGameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
 
-                
             }
         }
     }
@@ -100,6 +102,10 @@ public class GameManagerBehavior : MonoBehaviour
         scale.x = 0;
         scale.y = 0;
         GameObject.Find("EndObj").transform.localScale = scale;
+
+		playerName = "Test Player";
+		playerUID = rand.Next(1, 1000).ToString();
+
     }
 
     void showEnd()
