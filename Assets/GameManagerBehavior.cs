@@ -60,6 +60,7 @@ public class GameManagerBehavior : MonoBehaviour
     public Text healthLabel;
     public Image healthBar;
     public GameObject[] healthIndicator;
+    public bool running = false;
 
     private int health;
     public int Health
@@ -90,10 +91,21 @@ public class GameManagerBehavior : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        GameObject.Find("Restart").GetComponent<Button>().onClick.AddListener(() => { init(); });
+
+        playerName = "Test Player";
+		playerUID = rand.Next(1, 1000).ToString();
+        init();
+    }
+
+    void init()
+    {
+        gameOver = false;
+        running = true;
         Score = 0;
         Wave = 0;
         Health = 5;
-        
+
         originalScale = GameObject.Find(healthBarName).transform.localScale.x;
         originalPos = GameObject.Find(healthBarName).transform.position.x;
         print(originalPos);
@@ -103,9 +115,14 @@ public class GameManagerBehavior : MonoBehaviour
         scale.y = 0;
         GameObject.Find("EndObj").transform.localScale = scale;
 
-		playerName = "Test Player";
-		playerUID = rand.Next(1, 1000).ToString();
+        Vector3 scale1 = GameObject.Find("HealthBar").transform.localScale;
+        scale1.x = 1;
+        scale1.y = 1;
+        GameObject.Find("HealthBar").transform.localScale = scale1;
 
+        GameObject.Find(healthBarName).transform.position = GameObject.Find("redhealth").transform.position;
+
+        originalPos = GameObject.Find(healthBarName).transform.position.x;
     }
 
     void showEnd()
