@@ -5,24 +5,26 @@ using Amazon;
 
 
 public class Bug : MonoBehaviour {
-	private ddbHandler handler;
+	private HealthBar healthbar;
 
 	// Use this for initialization
 	void Start () {
-		handler = gameObject.GetComponent<ddbHandler> ();
+		healthbar = gameObject.GetComponentInChildren<HealthBar> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth < 0) {
-			handler.PerformPlayStore ("default");
+		if (healthbar.currentHealth <= 0) {
+			//Debug.Log (gameObject.GetInstanceID () + " " + healthbar.currentHealth);
+			Debug.Log ("Dead bug, calling, playstore");
+			gameObject.GetComponent<ddbHandler> ().PerformPlayStore ("default");
+
 			Destroy (gameObject);
 		}
-		
 	}
 
 	void OnMouseDown() {
-		gameObject.GetComponentInChildren<HealthBar> ().currentHealth -= 30;
+		healthbar.currentHealth -= 30;
 
 	}
 }

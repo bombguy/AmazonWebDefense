@@ -34,7 +34,8 @@ public class GameManagerBehavior : MonoBehaviour
             {
                 for (int i = 0; i < nextWaveLabels.Length; i++)
                 {
-                    nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
+                    if(nextWaveLabels[i] != null && GetComponent<Animator>() != null)
+                        nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
                 }
                 waveLabel.text = "Wave " + (wave + 1);
             }
@@ -57,6 +58,9 @@ public class GameManagerBehavior : MonoBehaviour
             {
                 Camera.main.GetComponent<CameraShake>().Shake();
             }
+
+            health = value;
+            healthLabel.text = "Health " + health;
             // 2
             if (health <= 0 && !gameOver)
             {
