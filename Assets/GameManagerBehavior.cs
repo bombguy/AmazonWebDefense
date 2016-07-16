@@ -47,8 +47,9 @@ public class GameManagerBehavior : MonoBehaviour
                 {
                     nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
                 }
+                waveLabel.text = "Wave " + (wave + 1);
             }
-            waveLabel.text = "Wave " + (wave + 1);
+            
         }
     }
     public float originalScale;
@@ -69,7 +70,7 @@ public class GameManagerBehavior : MonoBehaviour
             }
             // 2
             health = value;
-            healthLabel.text = "HEALTH: " + health;
+            healthLabel.text = "Health " + health;
             if (value >= 0)
             {
                 healthBar.fillAmount = value / 5.0f;
