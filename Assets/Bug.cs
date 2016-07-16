@@ -9,7 +9,7 @@ public class Bug : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth < 0)
+		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth <= 0)
 			Destroy (gameObject);
 	}
 
