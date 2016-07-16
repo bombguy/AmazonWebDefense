@@ -4,10 +4,12 @@ using System.Collections;
 
 
 public class Bug : MonoBehaviour {
+
+	public ddbHandler ddb;
 	public 
 	// Use this for initialization
 	void Start () {
-		
+		ddb = new ddbHandler ();
 	}
 	
 	// Update is called once per frame
@@ -15,7 +17,7 @@ public class Bug : MonoBehaviour {
 		if (gameObject.GetComponentInChildren<HealthBar> ().currentHealth < 0)
 			Destroy (gameObject);
 		ddbHandler ddbHandler = new ddbHandler ();
-		ddbHandler.PerformPlayStore ();
+		ddb.PerformPlayStore ();
 		
 	}
 
